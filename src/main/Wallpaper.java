@@ -13,13 +13,15 @@ public class Wallpaper {
 
     public Wallpaper() {
         // create frame
-        frame = new JFrame("Game");
+        frame = new JFrame("ChessGame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
-        // Khởi tạo âm nhạc nền
-        backgroundMusic = new Sound("theme.wav"); // Thay "background.wav" bằng tên tệp nhạc nền của bạn
-        backgroundMusic.playSound(); // Phát nhạc nền
-
+        // Set the application icon
+        ImageIcon icon2 = new ImageIcon("wall.png");
+        frame.setIconImage(icon2.getImage());
+        // Theme
+        backgroundMusic = new Sound("theme.wav"); 
+        backgroundMusic.playSound(); // 
         // create start label with image
         ImageIcon icon = new ImageIcon(new ImageIcon("start.png").getImage().getScaledInstance(100, 50, Image.SCALE_DEFAULT));
         startLabel = new JLabel(icon);

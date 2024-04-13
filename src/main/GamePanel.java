@@ -469,14 +469,19 @@ public class GamePanel extends JPanel implements Runnable {
 		return false;
 	}
 	private boolean opponentCanCaptureKing() {
-		Piece king = getKing(false);
-		for(Piece piece : simPieces) {
-			if(piece.color != king.color && piece.canMove(king.col, king.row)) {
-				return true;
-			}
-		}
-		return false;
+	    Piece king = getKing(false);
+	    if (king == null) {
+	        // Handle the case when king is null
+	        return false;
+	    }
+	    for(Piece piece : simPieces) {
+	        if(piece.color != king.color && piece.canMove(king.col, king.row)) {
+	            return true;
+	        }
+	    }
+	    return false;
 	}
+
 	private boolean isKingInCheck() {
 		Piece king = getKing(true);
 		if(activeP.canMove(king.col, king.row)) {

@@ -23,7 +23,7 @@ public class Queen extends Piece {
 	public List<int[]> getValidMoves() {
 		List<int[]> validMoves = new ArrayList<>();
 
-		// Các bước đi có thể của quân Hậu
+		// Queen Move
 		int[][] directions = {
 			{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
 		};
@@ -46,7 +46,7 @@ public class Queen extends Piece {
 	public void drawValidMoves(Graphics2D g) {
 		List<int[]> validMoves = getValidMoves();
 
-		g.setColor(Color.GREEN); // Đặt màu cho các bước đi hợp lệ
+		g.setColor(Color.GREEN); // Valid Move
 
 		for (int[] move : validMoves) {
 			int x = getX(move[0]);

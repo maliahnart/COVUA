@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import main.Board;
 import main.GamePanel;
+import main.FlashMode;
 import main.Type;
 
 public class Rook extends Piece {
@@ -23,7 +24,7 @@ public class Rook extends Piece {
 	public List<int[]> getValidMoves() {
 		List<int[]> validMoves = new ArrayList<>();
 
-		// Các bước đi có thể của quân Tháp
+		// Rook Move
 		int[][] directions = {
 			{-1, 0}, {1, 0}, {0, -1}, {0, 1}
 		};
@@ -47,7 +48,7 @@ public class Rook extends Piece {
 	public void drawValidMoves(Graphics2D g) {
 		List<int[]> validMoves = getValidMoves();
 
-		g.setColor(Color.GREEN); // Đặt màu cho các bước đi hợp lệ
+		g.setColor(Color.GREEN); // Valid Move
 
 		for (int[] move : validMoves) {
 			int x = getX(move[0]);

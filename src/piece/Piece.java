@@ -3,9 +3,13 @@ package piece;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 
+import main.FlashMode;
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
+import main.Wallpaper;
 import main.Board;
 import main.GamePanel;
 import main.Type;
@@ -18,7 +22,6 @@ public class Piece {
 	public int color;
 	public Piece hittingP;
 	public boolean moved, twoStepped;
-
 	public Piece(int color, int col, int row) {
 
 		this.col = col;
@@ -62,6 +65,11 @@ public class Piece {
 				return index;
 			}
 		}
+//		for (int index = 0; index < FlashMode.simPieces.size(); index++) {
+//			if (FlashMode.simPieces.get(index) == this) {
+//				return index;
+//			}
+//		}
 		return 0;
 	}
 
@@ -105,12 +113,12 @@ public class Piece {
 	}
 
 	public Piece getHittingP(int targetCol, int targetRow) {
-		for (Piece piece : GamePanel.simPieces) {
-			if (piece.col == targetCol && piece.row == targetRow && piece != this) {
-				return piece;
-			}
-		}
-		return null;
+		for (Piece piece : (GamePanel.simPieces)) {
+	        if (piece.col == targetCol && piece.row == targetRow && piece != this) {
+	            return piece;
+	        }
+	    }
+	    return null;
 	}
 
 	public boolean isValidSquare(int targetCol, int targetRow) {
@@ -166,6 +174,7 @@ public class Piece {
 		}
 		return false;
 	}
+
    public boolean pieceIsOnDiagonalLine(int targetCol, int targetRow) {
 	   if(targetRow < preRow) {
 		   //Up left

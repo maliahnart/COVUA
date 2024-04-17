@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 		setPieces();
 //		testPromotion();
 		
-		copyPieces(pieces, simPieces);
+		copyPieces(pieces, GamePanel.simPieces);
 	}
 
 	public void launchGame() {
@@ -145,7 +145,7 @@ public class GamePanel extends JPanel implements Runnable {
 	        // Mouse button clicked
 	        if (mouse.clicked && activeP == null) {
 	            // If the activeP is null, check if you can pick up a piece
-	            for (Piece piece : simPieces) {
+	            for (Piece piece : GamePanel.simPieces) {
 	                if (piece.color == currentColor && piece.col == mouse.x / Board.SQUARE_SIZE
 	                        && piece.row == mouse.y / Board.SQUARE_SIZE) {
 	                    activeP = piece;
@@ -165,7 +165,7 @@ public class GamePanel extends JPanel implements Runnable {
 	                // Move confirmed
 	                //Update the piece list in case a piece has been captured and removed during the simulation
 	            	sound.playSound(); 
-	                copyPieces(simPieces, pieces);
+	                copyPieces(GamePanel.simPieces, pieces);
 	                activeP.updatePosition();
 	                if(castlingP != null) {
 	                    castlingP.updatePosition();
@@ -187,7 +187,7 @@ public class GamePanel extends JPanel implements Runnable {
 	            } 
 	            else if (activeP != null) {
 	                //The move is not valid so reset everything
-	                copyPieces(pieces, simPieces);
+	                copyPieces(pieces, GamePanel.simPieces);
 	                activeP.resetPosition();
 	                activeP = null;
 	            }
@@ -202,7 +202,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	    //Reset the piece list in every loop
 	    // This is basically for restoring the removed piece during the simulation
-	    copyPieces(pieces, simPieces);
+	    copyPieces(pieces, GamePanel.simPieces);
 	    //Reset castling piece's position
 	    if(castlingP != null) {
 	        castlingP.col = castlingP.preCol;
@@ -220,7 +220,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	        // if hitting a piece, remove it from list
 	        if(activeP.hittingP != null) {
-	            simPieces.remove(activeP.hittingP.getIndex());
+	            GamePanel.simPieces.remove(activeP.hittingP.getIndex());
 	        }
 	        checkCastling();
 	        if(isIllegal(activeP) == false && opponentCanCaptureKing() == false) {
@@ -245,7 +245,7 @@ public class GamePanel extends JPanel implements Runnable {
 //	        if (mouse.clicked) {
 //	            if (activeP == null) {
 //	                // If the activeP is null, check if you can pick up a piece
-//	                for (Piece piece : simPieces) {
+//	                for (Piece piece : GamePanel.simPieces) {
 //	                    if (piece.color == currentColor && piece.col == mouse.x / Board.SQUARE_SIZE
 //	                            && piece.row == mouse.y / Board.SQUARE_SIZE) {
 //	                        activeP = piece;
@@ -266,7 +266,7 @@ public class GamePanel extends JPanel implements Runnable {
 //	                    // Move confirmed
 //	                
 //	                    //Update the piece list in case a piece has been captured and removed during the simulation
-//	                    copyPieces(simPieces, pieces);
+//	                    copyPieces(GamePanel.simPieces, pieces);
 //	                    activeP.updatePosition();
 //	                    if(castlingP != null) {
 //	                        castlingP.updatePosition();
@@ -288,7 +288,7 @@ public class GamePanel extends JPanel implements Runnable {
 //	                } 
 //	                else {
 //	                    //The move is not valid so reset everything
-//	                    copyPieces(pieces, simPieces);
+//	                    copyPieces(pieces, GamePanel.simPieces);
 //	                    activeP.resetPosition();
 //	                    activeP = null;
 //	                }
@@ -331,7 +331,7 @@ public class GamePanel extends JPanel implements Runnable {
 //			if (mouse.pressed) {
 //			    if (activeP == null) {
 //			        // If the activeP is null, check if you can pick up a piece
-//			        for (Piece piece : simPieces) {
+//			        for (Piece piece : GamePanel.simPieces) {
 //			            if (piece.color == currentColor && piece.col == mouse.x / Board.SQUARE_SIZE
 //			                    && piece.row == mouse.y / Board.SQUARE_SIZE) {
 //			                activeP = piece;
@@ -358,7 +358,7 @@ public class GamePanel extends JPanel implements Runnable {
 //						// Move confirmed
 //					
 //						//Update the piece list in case a piece has been captured and removed during the simulation
-//						copyPieces(simPieces, pieces);
+//						copyPieces(GamePanel.simPieces, pieces);
 //						activeP.updatePosition();
 //						if(castlingP != null) {
 //							castlingP.updatePosition();
@@ -380,7 +380,7 @@ public class GamePanel extends JPanel implements Runnable {
 //					} 
 //					else {
 //						//The move is not valid so reset everything
-//						copyPieces(pieces, simPieces);
+//						copyPieces(pieces, GamePanel.simPieces);
 //						activeP.resetPosition();
 //						activeP = null;
 //					}
@@ -395,7 +395,7 @@ public class GamePanel extends JPanel implements Runnable {
 //		
 //		//Reset the piece list in every loop
 //		// This is basically for restoring the removed piece during the simulation
-//        copyPieces(pieces, simPieces);
+//        copyPieces(pieces, GamePanel.simPieces);
 //        //Reset castling piece's position
 //        if(castlingP != null) {
 //        	castlingP.col = castlingP.preCol;
@@ -413,7 +413,7 @@ public class GamePanel extends JPanel implements Runnable {
 //			
 //			// if hitting a piece, remove it from list
 //			if(activeP.hittingP != null) {
-//				simPieces.remove(activeP.hittingP.getIndex());
+//				GamePanel.simPieces.remove(activeP.hittingP.getIndex());
 //			}
 //			checkCastling();
 //			if(isIllegal(activeP) == false && opponentCanCaptureKing() == false) {
@@ -429,7 +429,7 @@ public class GamePanel extends JPanel implements Runnable {
 //
 //	        //Reset the piece list in every loop
 //	        // This is basically for restoring the removed piece during the simulation
-//	        copyPieces(pieces, simPieces);
+//	        copyPieces(pieces, GamePanel.simPieces);
 //	        //Reset castling piece's position
 //	        if(castlingP != null) {
 //	            castlingP.col = castlingP.preCol;
@@ -447,7 +447,7 @@ public class GamePanel extends JPanel implements Runnable {
 //
 //	            // if hitting a piece, remove it from list
 //	            if(activeP.hittingP != null) {
-//	                simPieces.remove(activeP.hittingP.getIndex());
+//	                GamePanel.simPieces.remove(activeP.hittingP.getIndex());
 //	            }
 //	            checkCastling();
 //	            if(isIllegal(activeP) == false && opponentCanCaptureKing() == false) {
@@ -459,31 +459,47 @@ public class GamePanel extends JPanel implements Runnable {
 //	}
 
 	private boolean isIllegal(Piece king) {
-		if(king.type == Type.KING) {
-			for(Piece piece : simPieces) {
-				if(piece != king && piece.color != king.color && piece.canMove(king.col, king.row)) {
-					return true;
-				}
-			}
-		}
-		return false;
+	    if(king.type == Type.KING) {
+	        for(Piece piece : GamePanel.simPieces) {
+	            if(piece != king && piece.color != king.color && piece.canMove(king.col, king.row)) {
+	                return true;
+	            }
+	        }
+	    } else {
+	        // If the piece is not a king and the king is in check, allow the piece to move
+	        Piece ownKing = getKing(false);
+	        if(isKingInCheck()) {
+	            for(Piece piece : GamePanel.simPieces) {
+	                if(piece != king && piece.color == king.color && piece.canMove(ownKing.col, ownKing.row)) {
+	                    return false;
+	                }
+	            }
+	        }
+	    }
+	    return false;
 	}
+
+
 	private boolean opponentCanCaptureKing() {
 	    Piece king = getKing(false);
 	    if (king == null) {
 	        // Handle the case when king is null
 	        return false;
 	    }
-	    for(Piece piece : simPieces) {
+	    for(Piece piece : GamePanel.simPieces) {
 	        if(piece.color != king.color && piece.canMove(king.col, king.row)) {
 	            return true;
 	        }
 	    }
 	    return false;
 	}
-
+	
 	private boolean isKingInCheck() {
 		Piece king = getKing(true);
+		if (king == null) {
+	        // Handle the case when king is null
+	        return false;
+	    }
 		if(activeP.canMove(king.col, king.row)) {
 			checkingP = activeP;
 			return true;
@@ -495,7 +511,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	private Piece getKing(boolean opponent) {
 		Piece king = null;
-		for(Piece piece : simPieces) {
+		for(Piece piece : GamePanel.simPieces) {
 			if(opponent) {
 				if(piece.type == Type.KING && piece.color != currentColor) {
 					king = piece;
@@ -525,7 +541,7 @@ public class GamePanel extends JPanel implements Runnable {
 				if(checkingP.row<king.row) {
 					//The checking piece is above the king
 					for(int row = checkingP.row; row<king.row;row++) {
-						for(Piece piece : simPieces) {
+						for(Piece piece : GamePanel.simPieces) {
 							if(piece!= king && piece.color != currentColor && piece.canMove(checkingP.col,  row)) {
 								return false;
 							}
@@ -535,7 +551,7 @@ public class GamePanel extends JPanel implements Runnable {
 				if(checkingP.row > king.row) {
 					//The checking piece is blow the king
 					for(int row = checkingP.row; row > king.row;row--) {
-						for(Piece piece : simPieces) {
+						for(Piece piece : GamePanel.simPieces) {
 							if(piece!= king && piece.color != currentColor && piece.canMove(checkingP.col,  row)) {
 								return false;
 							}
@@ -549,7 +565,7 @@ public class GamePanel extends JPanel implements Runnable {
 				if(checkingP.col < king.col) {
 					// The checking piece is to the left
 					for(int col = checkingP.col; col<king.col;col++) {
-						for(Piece piece : simPieces) {
+						for(Piece piece : GamePanel.simPieces) {
 							if(piece!= king && piece.color != currentColor && piece.canMove(col, checkingP.row)) {
 								return false;
 							}
@@ -559,7 +575,7 @@ public class GamePanel extends JPanel implements Runnable {
 				if(checkingP.col > king.col) {
 					// the checking piece is to the right
 					for(int col = checkingP.col; col>king.col;col--) {
-						for(Piece piece : simPieces) {
+						for(Piece piece : GamePanel.simPieces) {
 							if(piece!= king && piece.color != currentColor && piece.canMove(col, checkingP.row)) {
 								return false;
 							}
@@ -575,7 +591,7 @@ public class GamePanel extends JPanel implements Runnable {
 					if(checkingP.col < king.col) {
 						// The checking piece is in the upper left
 						for(int col = checkingP.col, row = checkingP.row; col < king.col;col++,row++) {
-							for(Piece piece : simPieces) {
+							for(Piece piece : GamePanel.simPieces) {
 								if(piece != king && piece.color != currentColor && piece.canMove(col, row)) {
 									return false;
 								}
@@ -585,7 +601,7 @@ public class GamePanel extends JPanel implements Runnable {
 					if(checkingP.col > king.col) {
 						//The checking piece is in the upper right
 						for(int col = checkingP.col, row = checkingP.row; col > king.col;col--,row++) {
-							for(Piece piece : simPieces) {
+							for(Piece piece : GamePanel.simPieces) {
 								if(piece != king && piece.color != currentColor && piece.canMove(col, row)) {
 									return false;
 								}
@@ -598,7 +614,7 @@ public class GamePanel extends JPanel implements Runnable {
 					if(checkingP.col < king.col) {
 						// The checking piece is in the lower left
 						for(int col = checkingP.col, row = checkingP.row; col < king.col;col++,row--) {
-							for(Piece piece : simPieces) {
+							for(Piece piece : GamePanel.simPieces) {
 								if(piece != king && piece.color != currentColor && piece.canMove(col, row)) {
 									return false;
 								}
@@ -608,7 +624,7 @@ public class GamePanel extends JPanel implements Runnable {
 					if(checkingP.col > king.col) {
 						// The checking piece is in the lower right
 						for(int col = checkingP.col, row = checkingP.row; col >  king.col;col--,row--) {
-							for(Piece piece : simPieces) {
+							for(Piece piece : GamePanel.simPieces) {
 								if(piece != king && piece.color != currentColor && piece.canMove(col, row)) {
 									return false;
 								}
@@ -618,7 +634,11 @@ public class GamePanel extends JPanel implements Runnable {
 				}
 			}
 			else {
-				// The checking piece is Knight
+				for(Piece piece : GamePanel.simPieces) {
+	                if(piece != king && piece.color == king.color && piece.canMove(checkingP.col, checkingP.row)) {
+	                    return false;
+	                }
+	            }
 			}
 		}
 		return true;
@@ -643,7 +663,7 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		if(king.canMove(king.col,king.row)) {
 			if(king.hittingP != null) {
-				simPieces.remove(king.hittingP.getIndex());
+				GamePanel.simPieces.remove(king.hittingP.getIndex());
 			}
 			if(isIllegal(king) == false) {
 				isValidMove = true;
@@ -651,7 +671,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		//Reset the king position and restore the remove piece
 		king.resetPosition();
-		copyPieces(pieces,simPieces);
+		copyPieces(pieces,GamePanel.simPieces);
 		return isValidMove;
 	}
 //	public void endTurn() {
@@ -660,7 +680,7 @@ public class GamePanel extends JPanel implements Runnable {
 //
 //	    // Check if the opponent has any valid moves
 //	    boolean hasValidMoves = false;
-//	    for (Piece piece : simPieces) {
+//	    for (Piece piece : GamePanel.simPieces) {
 //	        if (piece.color == currentColor) {
 //	            for (int colPlus = -1; colPlus <= 1; colPlus++) {
 //	                for (int rowPlus = -1; rowPlus <= 1; rowPlus++) {
@@ -692,7 +712,7 @@ public class GamePanel extends JPanel implements Runnable {
 	private boolean isStalemate() {
 		int count = 0;
 		//Count the number of piece
-		for(Piece piece : simPieces) {
+		for(Piece piece : GamePanel.simPieces) {
 			if(piece.color!= currentColor) {
 				count++;
 			}
@@ -757,14 +777,14 @@ public class GamePanel extends JPanel implements Runnable {
     		for(Piece piece : promoPieces) {
     			if(piece.col == mouse.x/Board.SQUARE_SIZE && piece.row == mouse.y/Board.SQUARE_SIZE) {
     				switch(piece.type) {
-    				case ROOK : simPieces.add(new Rook(currentColor, activeP.col, activeP.row)); break;
-    				case KNIGHT : simPieces.add(new Knight(currentColor, activeP.col, activeP.row)); break;
-    				case BISHOP : simPieces.add(new Bishop(currentColor, activeP.col, activeP.row)); break;
-    				case QUEEN : simPieces.add(new Queen(currentColor, activeP.col, activeP.row)); break;
+    				case ROOK : GamePanel.simPieces.add(new Rook(currentColor, activeP.col, activeP.row)); break;
+    				case KNIGHT : GamePanel.simPieces.add(new Knight(currentColor, activeP.col, activeP.row)); break;
+    				case BISHOP : GamePanel.simPieces.add(new Bishop(currentColor, activeP.col, activeP.row)); break;
+    				case QUEEN : GamePanel.simPieces.add(new Queen(currentColor, activeP.col, activeP.row)); break;
     				default: break;
     				}
-    				simPieces.remove(activeP.getIndex());
-    				copyPieces(simPieces, pieces);
+    				GamePanel.simPieces.remove(activeP.getIndex());
+    				copyPieces(GamePanel.simPieces, pieces);
     				activeP = null;
     				promotion = false;
     				changePlayer();
@@ -780,7 +800,7 @@ public class GamePanel extends JPanel implements Runnable {
 		board.draw(g2);
 
 		// Pieces
-		for (Piece p : simPieces) {
+		for (Piece p : GamePanel.simPieces) {
 			p.draw(g2);
 		}
 //		if(selectedP != null){
@@ -844,8 +864,8 @@ public class GamePanel extends JPanel implements Runnable {
 				g2.drawString("White's turn", 840, 550);
 				if(checkingP != null && checkingP.color == BLACK) {
 					g2.setColor(Color.red);
-					g2.drawString("The King", 840, 550);
-					g2.drawString("is in check", 840, 700);
+					g2.drawString("The King", 840, 300);
+					g2.drawString("is in check", 840, 400);
 				}
 			}
 			else {

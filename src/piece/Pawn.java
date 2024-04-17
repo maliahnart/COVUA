@@ -6,7 +6,9 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import main.Board;
 import main.GamePanel;
+import main.FlashMode;
 import main.Type;
+import main.Wallpaper;
 
 public class Pawn extends Piece {
 
@@ -98,7 +100,7 @@ public class Pawn extends Piece {
 			}
 			// In passing
 			if (Math.abs(targetCol - preCol) == 1 && targetRow == preRow + moveValue) {
-				for(Piece piece : GamePanel.simPieces) {
+				for(Piece piece : (Wallpaper.getGamePanel() instanceof GamePanel) ? GamePanel.simPieces : FlashMode.simPieces) {
 					if(piece.col == targetCol && piece.row == preRow && piece.twoStepped == true) {
 						hittingP = piece;
 						return true;

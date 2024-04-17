@@ -7,9 +7,10 @@ import java.awt.event.MouseEvent;
 import main.Sound;
 public class Wallpaper {
     private JFrame frame;
-    private JPanel gamePanel;
-    private JLabel startLabel, exitLabel;
+    private static JPanel gamePanel;
+	private JLabel startLabel, exitLabel;
     private Sound backgroundMusic; 
+    private JLabel flashModeLabel; 
 
     public Wallpaper() {
         // create frame
@@ -43,7 +44,20 @@ public class Wallpaper {
                 System.exit(0);
             }
         });
+        // create flashMode label with image
+        ImageIcon flashModeIcon = new ImageIcon(new ImageIcon("Flash.png").getImage().getScaledInstance(100, 50, Image.SCALE_DEFAULT));
+        flashModeLabel = new JLabel(flashModeIcon);
 
+        flashModeLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                startFlashMode();
+            }
+        });
+     // set bounds of components
+        flashModeLabel.setBounds(350, 400, 100, 50); // adjust these as necessary
+
+       
         // create and add background image
         JLabel backgroundLabel = new JLabel(new ImageIcon("wall.png"));
         backgroundLabel.setBounds(0, 0, 800, 600);
@@ -57,6 +71,7 @@ public class Wallpaper {
         exitLabel.setBounds(350, 300, 100, 50); // adjust these as necessary
 
         // add components to layered pane
+        layeredPane.add(flashModeLabel, Integer.valueOf(2));
         layeredPane.add(backgroundLabel, Integer.valueOf(1));
         layeredPane.add(startLabel, Integer.valueOf(2));
         layeredPane.add(exitLabel, Integer.valueOf(2));
@@ -67,7 +82,14 @@ public class Wallpaper {
         frame.pack();
         frame.setVisible(true);
     }
+    public static JPanel getGamePanel() {
+		return gamePanel;
+	}
 
+	public void setGamePanel(JPanel gamePanel) {
+		this.gamePanel = gamePanel;
+	}
+	
     public void startGame() {
     	  backgroundMusic.stopSound();
         // remove labels
@@ -89,4 +111,27 @@ public class Wallpaper {
         // Launch Game
         ((GamePanel) gamePanel).launchGame();
     }
+    public void startFlashMode() {
+        backgroundMusic.stopSound();
+        // remove labels
+        startLabel.setVisible(false);
+        exitLabel.setVisible(false);
+        flashModeLabel.setVisible(false); // Hide the flashModeLabel
+
+        // create gamePanel
+        gamePanel = new FlashMode(); // Use FlashMode instead of GamePanel
+
+        // add gamePanel in Game
+        frame.add(gamePanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+
+        // Update JFrame
+        frame.validate();
+        frame.repaint();
+
+        // Launch Game
+        ((FlashMode) gamePanel).launchGame(); // Cast to FlashMode instead of GamePanel
+    }
 }
+

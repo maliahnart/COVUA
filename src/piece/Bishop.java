@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import main.Board;
 import main.GamePanel;
 import main.Type;
+import main.FlashMode;
 
 public class Bishop  extends Piece{
 
@@ -23,7 +24,7 @@ public class Bishop  extends Piece{
 	  public List<int[]> getValidMoves() {
 	        List<int[]> validMoves = new ArrayList<>();
 
-	        // Các bước đi có thể của quân Tượng theo đường chéo
+	        // Bishop Move 
 	        int[][] directions = {
 	            {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
 	        };
@@ -47,7 +48,7 @@ public class Bishop  extends Piece{
 	    public void drawValidMoves(Graphics2D g) {
 	        List<int[]> validMoves = getValidMoves();
 
-	        g.setColor(Color.GREEN); // Đặt màu cho các bước đi hợp lệ
+	        g.setColor(Color.GREEN); // Valid Color
 
 	        for (int[] move : validMoves) {
 	            int x = getX(move[0]);

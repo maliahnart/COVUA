@@ -5,6 +5,7 @@ import java.util.List;
 import main.Board;
 import main.GamePanel;
 import main.Type;
+import main.FlashMode;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -21,10 +22,11 @@ public class Knight extends Piece {
 			image = getImage("/piece/b-knight");
 		}
 	}
+	
 	public List<int[]> getValidMoves() {
 	    List<int[]> validMoves = new ArrayList<>();
 
-	    // Các bước đi có thể của quân Mã theo hình chữ L
+	    // Knight Move
 	    int[][] offsets = {
 	        {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
 	        {1, -2}, {1, 2}, {2, -1}, {2, 1}
@@ -44,7 +46,7 @@ public class Knight extends Piece {
 	public void drawValidMoves(Graphics2D g) {
 	    List<int[]> validMoves = getValidMoves();
 
-	    g.setColor(Color.GREEN); // Đặt màu cho các bước đi hợp lệ
+	    g.setColor(Color.GREEN); // Valid Move
 
 	    for (int[] move : validMoves) {
 	        int x = getX(move[0]);
